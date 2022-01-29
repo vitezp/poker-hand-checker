@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace PokerHandChecker.Domain.Interfaces
+namespace PokerHandChecker.Domain.Interfaces;
+
+public interface IHand
 {
-    public interface IHand
-    {
-        IEnumerable<ICard> Cards { get; }
-        string ToString();
-    }
+    IEnumerable<ICard> Cards { get; }
+    string ToString();
 }

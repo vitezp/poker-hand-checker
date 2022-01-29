@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using PokerHandChecker.Domain.Interfaces;
 
-namespace PokerHandChecker.Application
+namespace PokerHandChecker.Application;
+
+public class Hand : IHand
 {
-    public class Hand : IHand
+    public IEnumerable<ICard> Cards { get; }
+
+    public Hand(IEnumerable<ICard> cards)
     {
-        public IEnumerable<ICard> Cards { get; }
+        Cards = cards;
+    }
 
-        public Hand(IEnumerable<ICard> cards)
-        {
-            Cards = cards;
-        }
-
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-        }
+    public override string ToString()
+    {
+        throw new NotImplementedException();
     }
 }

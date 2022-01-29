@@ -2,22 +2,21 @@
 using PokerHandChecker.Domain.Enums;
 using PokerHandChecker.Domain.Interfaces;
 
-namespace PokerHandChecker.Application
+namespace PokerHandChecker.Application;
+
+public class Card : ICard
 {
-    public class Card : ICard
+    public CardFace Face { get; }
+    public CardSuit Suit { get; }
+
+    public Card(CardFace face, CardSuit suit)
     {
-        public CardFace Face { get; }
-        public CardSuit Suit { get; }
+        Face = face;
+        Suit = suit;
+    }
 
-        public Card(CardFace face, CardSuit suit)
-        {
-            Face = face;
-            Suit = suit;
-        }
-
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-        }
+    public override string ToString()
+    {
+        throw new NotImplementedException();
     }
 }

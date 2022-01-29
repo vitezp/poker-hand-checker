@@ -1,10 +1,9 @@
-﻿namespace PokerHandChecker.Domain.Enums
+﻿namespace PokerHandChecker.Domain.Enums;
+
+public enum CardSuit
 {
-    public enum CardSuit
-    {
-        Clubs = 1,    // ♣
-        Diamonds = 2, // ♦
-        Hearts = 3,   // ♥
-        Spades = 4    // ♠
-    }
+    Clubs = 1,    // ♣
+    Diamonds = 2, // ♦
+    Hearts = 3,   // ♥
+    Spades = 4    // ♠
 }

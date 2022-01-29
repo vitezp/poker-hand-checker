@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace PokerHandChecker.Domain.Models
+namespace PokerHandChecker.Domain.Models;
+
+public class InvalidPokerHandException : Exception
 {
-    public class InvalidPokerHandException : Exception
-    {
-    }
 }
