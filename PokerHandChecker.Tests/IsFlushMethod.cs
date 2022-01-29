@@ -5,563 +5,561 @@ using PokerHandChecker.Domain.Enums;
 using PokerHandChecker.Domain.Interfaces;
 using PokerHandChecker.Domain.Models;
 
-namespace PokerHandChecker.Tests
+namespace PokerHandChecker.Tests;
+
+[TestClass]
+public sealed class IsFlushMethod
 {
-   
-    [TestClass]
-    public class IsFlushMethod
+    private readonly IPokerHandsChecker sut = new PokerHandsChecker();
+
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithNoCards()
     {
-        private readonly IPokerHandsChecker sut = new PokerHandsChecker();
+        var handWithNoCards = new Hand(new List<ICard>());
+        var expected = false;
+        var actual = sut.IsFlush(handWithNoCards);
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithNoCards()
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithFourDifferentCardsOnEqualSuit()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithNoCards = new Hand(new List<ICard>());
-            var expected = false;
-            var actual = sut.IsFlush(handWithNoCards);
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Seven, CardSuit.Diamonds),
+            new Card(CardFace.Two, CardSuit.Diamonds),
+            new Card(CardFace.Eight, CardSuit.Diamonds)
+        });
 
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithFourDifferentCardsOnEqualSuit()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithThreeEqualOnSuitOfFiveCards()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Seven, CardSuit.Diamonds),
-                new Card(CardFace.Two, CardSuit.Diamonds),
-                new Card(CardFace.Eight, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Seven, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithThreeEqualOnSuitOfFiveCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithValidFullHouse()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Seven, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Clubs),
-            });
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Diamonds),
+            new Card(CardFace.Six, CardSuit.Hearts),
+            new Card(CardFace.Ace, CardSuit.Spades),
+            new Card(CardFace.Ace, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithValidFullHouse()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithInvalidFullHouse()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Diamonds),
-                new Card(CardFace.Six, CardSuit.Hearts),
-                new Card(CardFace.Ace, CardSuit.Spades),
-                new Card(CardFace.Ace, CardSuit.Clubs),
-            });
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Diamonds),
+            new Card(CardFace.Six, CardSuit.Hearts),
+            new Card(CardFace.Ace, CardSuit.Spades),
+            new Card(CardFace.Ace, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithInvalidFullHouse()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithOnePair()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Diamonds),
-                new Card(CardFace.Six, CardSuit.Hearts),
-                new Card(CardFace.Ace, CardSuit.Spades),
-                new Card(CardFace.Ace, CardSuit.Clubs),
-            });
+            new Card(CardFace.King, CardSuit.Clubs),
+            new Card(CardFace.King, CardSuit.Diamonds),
+            new Card(CardFace.Seven, CardSuit.Hearts),
+            new Card(CardFace.Nine, CardSuit.Diamonds),
+            new Card(CardFace.Jack, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithOnePair()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithTwoPair()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.King, CardSuit.Clubs),
-                new Card(CardFace.King, CardSuit.Diamonds),
-                new Card(CardFace.Seven, CardSuit.Hearts),
-                new Card(CardFace.Nine, CardSuit.Diamonds),
-                new Card(CardFace.Jack, CardSuit.Clubs),
-            });
+            new Card(CardFace.King, CardSuit.Clubs),
+            new Card(CardFace.King, CardSuit.Diamonds),
+            new Card(CardFace.Nine, CardSuit.Hearts),
+            new Card(CardFace.Nine, CardSuit.Diamonds),
+            new Card(CardFace.Jack, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithTwoPair()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualOnSuitOfFiveCards()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.King, CardSuit.Clubs),
-                new Card(CardFace.King, CardSuit.Diamonds),
-                new Card(CardFace.Nine, CardSuit.Hearts),
-                new Card(CardFace.Nine, CardSuit.Diamonds),
-                new Card(CardFace.Jack, CardSuit.Clubs),
-            });
+            new Card(CardFace.King, CardSuit.Clubs),
+            new Card(CardFace.King, CardSuit.Clubs),
+            new Card(CardFace.Nine, CardSuit.Hearts),
+            new Card(CardFace.Nine, CardSuit.Diamonds),
+            new Card(CardFace.Jack, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualOnSuitOfFiveCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithThreeOfAKind()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.King, CardSuit.Clubs),
-                new Card(CardFace.King, CardSuit.Clubs),
-                new Card(CardFace.Nine, CardSuit.Hearts),
-                new Card(CardFace.Nine, CardSuit.Diamonds),
-                new Card(CardFace.Jack, CardSuit.Clubs),
-            });
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Diamonds),
+            new Card(CardFace.Six, CardSuit.Hearts),
+            new Card(CardFace.Seven, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithThreeOfAKind()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithFourOfAKind()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Diamonds),
-                new Card(CardFace.Six, CardSuit.Hearts),
-                new Card(CardFace.Seven, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Clubs),
-            });
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Diamonds),
+            new Card(CardFace.Six, CardSuit.Hearts),
+            new Card(CardFace.Six, CardSuit.Spades),
+            new Card(CardFace.Ace, CardSuit.Clubs),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithFourOfAKind()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithFiveDifferentCardsOnEqualSuit()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Diamonds),
-                new Card(CardFace.Six, CardSuit.Hearts),
-                new Card(CardFace.Six, CardSuit.Spades),
-                new Card(CardFace.Ace, CardSuit.Clubs),
-            });
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Seven, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Diamonds),
+            new Card(CardFace.Two, CardSuit.Diamonds),
+            new Card(CardFace.Eight, CardSuit.Diamonds)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = true;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithFiveDifferentCardsOnEqualSuit()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualOfFiveCardsOnEqualSuit()
+    {
+        var handWithTwoEqualOfFiveCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Seven, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Diamonds),
-                new Card(CardFace.Two, CardSuit.Diamonds),
-                new Card(CardFace.Eight, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Diamonds),
+            new Card(CardFace.Two, CardSuit.Diamonds),
+            new Card(CardFace.Eight, CardSuit.Diamonds)
+        });
 
-            var expected = true;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualOfFiveCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualOfFiveCardsOnEqualSuit()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithSixDifferentCards()
+    {
+        var handWithSixDifferentCards = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualOfFiveCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Diamonds),
-                new Card(CardFace.Two, CardSuit.Diamonds),
-                new Card(CardFace.Eight, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Seven, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.Two, CardSuit.Spades),
+            new Card(CardFace.Eight, CardSuit.Diamonds),
+            new Card(CardFace.Three, CardSuit.Spades)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualOfFiveCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithSixDifferentCards);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithSixDifferentCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualCards()
+    {
+        var handWithTwoEqualCard = new Hand(new List<ICard>()
         {
-            var handWithSixDifferentCards = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Seven, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.Two, CardSuit.Spades),
-                new Card(CardFace.Eight, CardSuit.Diamonds),
-                new Card(CardFace.Three, CardSuit.Spades)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.Two, CardSuit.Spades),
+            new Card(CardFace.Eight, CardSuit.Diamonds)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithSixDifferentCards);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualCard);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualOnSuitCards()
+    {
+        var handWithTwoEqualCard = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualCard = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.Two, CardSuit.Spades),
-                new Card(CardFace.Eight, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Ten, CardSuit.Hearts),
+            new Card(CardFace.Ten, CardSuit.Spades)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualCard);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualCard);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualOnSuitCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithFiveEqualCards()
+    {
+        var handWithFiveEqualCards = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualCard = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Ten, CardSuit.Hearts),
-                new Card(CardFace.Ten, CardSuit.Spades)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualCard);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveEqualCards);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithFiveEqualCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualPairOfCards()
+    {
+        var handWithTwoEqualPairOfCards = new Hand(new List<ICard>()
         {
-            var handWithFiveEqualCards = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.Eight, CardSuit.Diamonds)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveEqualCards);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualPairOfCards);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualPairOfCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualOfFourCards()
+    {
+        var handWithTwoEqualOfFourCards = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualPairOfCards = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.Eight, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.Eight, CardSuit.Diamonds)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualPairOfCards);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualOfFourCards);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualOfFourCards()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualOfSixCardsWithDifferentFaces()
+    {
+        var handWithTwoEqualOfSixCards = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualOfFourCards = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.Eight, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Seven, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.Two, CardSuit.Spades),
+            new Card(CardFace.Eight, CardSuit.Diamonds)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualOfFourCards);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualOfSixCards);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualOfSixCardsWithDifferentFaces()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualOfSixCardsOnFiveWithEqualFaces()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualOfSixCards = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Seven, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.Two, CardSuit.Spades),
-                new Card(CardFace.Eight, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Ten, CardSuit.Hearts),
+            new Card(CardFace.Ten, CardSuit.Spades),
+            new Card(CardFace.Ace, CardSuit.Diamonds)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualOfSixCards);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualOfSixCardsOnFiveWithEqualFaces()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    [ExpectedException(typeof(InvalidPokerHandException))]
+    public void TestOnHandWithTwoEqualOfSixCardsOnEqualSuit()
+    {
+        var handWithTwoEqualOfSixCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Ten, CardSuit.Hearts),
-                new Card(CardFace.Ten, CardSuit.Spades),
-                new Card(CardFace.Ace, CardSuit.Diamonds)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Seven, CardSuit.Clubs),
+            new Card(CardFace.Ace, CardSuit.Clubs),
+            new Card(CardFace.Two, CardSuit.Clubs),
+            new Card(CardFace.Eight, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualOfSixCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        [ExpectedException(typeof(InvalidPokerHandException))]
-        public void TestOnHandWithTwoEqualOfSixCardsOnEqualSuit()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithValidStraight_1()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualOfSixCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Seven, CardSuit.Clubs),
-                new Card(CardFace.Ace, CardSuit.Clubs),
-                new Card(CardFace.Two, CardSuit.Clubs),
-                new Card(CardFace.Eight, CardSuit.Clubs)
-            });
+            new Card(CardFace.Five, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Diamonds),
+            new Card(CardFace.Seven, CardSuit.Hearts),
+            new Card(CardFace.Eight, CardSuit.Diamonds),
+            new Card(CardFace.Nine, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualOfSixCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithValidStraight_1()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithValidStraight_2()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Five, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Diamonds),
-                new Card(CardFace.Seven, CardSuit.Hearts),
-                new Card(CardFace.Eight, CardSuit.Diamonds),
-                new Card(CardFace.Nine, CardSuit.Clubs)
-            });
+            new Card(CardFace.Ace, CardSuit.Clubs),
+            new Card(CardFace.Two, CardSuit.Diamonds),
+            new Card(CardFace.Three, CardSuit.Hearts),
+            new Card(CardFace.Four, CardSuit.Diamonds),
+            new Card(CardFace.Five, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithValidStraight_2()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithValidStraight_3()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ace, CardSuit.Clubs),
-                new Card(CardFace.Two, CardSuit.Diamonds),
-                new Card(CardFace.Three, CardSuit.Hearts),
-                new Card(CardFace.Four, CardSuit.Diamonds),
-                new Card(CardFace.Five, CardSuit.Clubs)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Jack, CardSuit.Diamonds),
+            new Card(CardFace.Queen, CardSuit.Hearts),
+            new Card(CardFace.King, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithValidStraight_3()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithHighCard_1()
+    {
+        var handWithTwoEqualOfSixCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Jack, CardSuit.Diamonds),
-                new Card(CardFace.Queen, CardSuit.Hearts),
-                new Card(CardFace.King, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Clubs)
-            });
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.King, CardSuit.Hearts),
+            new Card(CardFace.Queen, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Two, CardSuit.Spades),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualOfSixCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithHighCard_1()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithHighCard_2()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualOfSixCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.King, CardSuit.Hearts),
-                new Card(CardFace.Queen, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Two, CardSuit.Spades),
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Jack, CardSuit.Diamonds),
+            new Card(CardFace.Seven, CardSuit.Hearts),
+            new Card(CardFace.King, CardSuit.Diamonds),
+            new Card(CardFace.Ace, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualOfSixCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithHighCard_2()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithHighCard_3()
+    {
+        var handWithTwoEqualOfSixCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Jack, CardSuit.Diamonds),
-                new Card(CardFace.Seven, CardSuit.Hearts),
-                new Card(CardFace.King, CardSuit.Diamonds),
-                new Card(CardFace.Ace, CardSuit.Clubs)
-            });
+            new Card(CardFace.Ace, CardSuit.Hearts),
+            new Card(CardFace.King, CardSuit.Hearts),
+            new Card(CardFace.Queen, CardSuit.Clubs),
+            new Card(CardFace.Ten, CardSuit.Diamonds),
+            new Card(CardFace.Two, CardSuit.Spades),
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithTwoEqualOfSixCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithHighCard_3()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithValidStraightFlush_1()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithTwoEqualOfSixCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ace, CardSuit.Hearts),
-                new Card(CardFace.King, CardSuit.Hearts),
-                new Card(CardFace.Queen, CardSuit.Clubs),
-                new Card(CardFace.Ten, CardSuit.Diamonds),
-                new Card(CardFace.Two, CardSuit.Spades),
-            });
+            new Card(CardFace.Five, CardSuit.Clubs),
+            new Card(CardFace.Six, CardSuit.Clubs),
+            new Card(CardFace.Seven, CardSuit.Clubs),
+            new Card(CardFace.Eight, CardSuit.Clubs),
+            new Card(CardFace.Nine, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithTwoEqualOfSixCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithValidStraightFlush_1()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithValidStraightFlush_2()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Five, CardSuit.Clubs),
-                new Card(CardFace.Six, CardSuit.Clubs),
-                new Card(CardFace.Seven, CardSuit.Clubs),
-                new Card(CardFace.Eight, CardSuit.Clubs),
-                new Card(CardFace.Nine, CardSuit.Clubs)
-            });
+            new Card(CardFace.Ace, CardSuit.Clubs),
+            new Card(CardFace.Two, CardSuit.Clubs),
+            new Card(CardFace.Three, CardSuit.Clubs),
+            new Card(CardFace.Four, CardSuit.Clubs),
+            new Card(CardFace.Five, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithValidStraightFlush_2()
+    [TestMethod]
+    [Description("Test on PokerHandsChecker.cs")]
+    public void TestOnHandWithValidStraightFlush_3()
+    {
+        var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
         {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ace, CardSuit.Clubs),
-                new Card(CardFace.Two, CardSuit.Clubs),
-                new Card(CardFace.Three, CardSuit.Clubs),
-                new Card(CardFace.Four, CardSuit.Clubs),
-                new Card(CardFace.Five, CardSuit.Clubs)
-            });
+            new Card(CardFace.Ten, CardSuit.Clubs),
+            new Card(CardFace.Jack, CardSuit.Clubs),
+            new Card(CardFace.Queen, CardSuit.Clubs),
+            new Card(CardFace.King, CardSuit.Clubs),
+            new Card(CardFace.Ace, CardSuit.Clubs)
+        });
 
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        [Description("Test on PokerHandsChecker.cs")]
-        public void TestOnHandWithValidStraightFlush_3()
-        {
-            var handWithFiveDifferentCardsOnEqualSuit = new Hand(new List<ICard>()
-            {
-                new Card(CardFace.Ten, CardSuit.Clubs),
-                new Card(CardFace.Jack, CardSuit.Clubs),
-                new Card(CardFace.Queen, CardSuit.Clubs),
-                new Card(CardFace.King, CardSuit.Clubs),
-                new Card(CardFace.Ace, CardSuit.Clubs)
-            });
-
-            var expected = false;
-            var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
-            Assert.AreEqual(expected, actual);
-        }
+        var expected = false;
+        var actual = sut.IsFlush(handWithFiveDifferentCardsOnEqualSuit);
+        Assert.AreEqual(expected, actual);
     }
 }

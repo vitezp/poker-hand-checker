@@ -8,7 +8,7 @@ using PokerHandChecker.Domain.Models;
 namespace PokerHandChecker.Tests;
 
 [TestClass]
-public class CompareHandsMethod
+public sealed class CompareHandsMethod
 {
     private readonly IPokerHandsChecker sut = new PokerHandsChecker();
 

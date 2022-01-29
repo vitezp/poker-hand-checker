@@ -4,7 +4,7 @@ using PokerHandChecker.Domain.Interfaces;
 
 namespace PokerHandChecker.Application;
 
-public class Card : ICard
+public sealed class Card : ICard
 {
     public CardFace Face { get; }
     public CardSuit Suit { get; }

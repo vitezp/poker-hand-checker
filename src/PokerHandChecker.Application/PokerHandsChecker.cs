@@ -3,7 +3,7 @@ using PokerHandChecker.Domain.Interfaces;
 
 namespace PokerHandChecker.Application;
 
-public class PokerHandsChecker : IPokerHandsChecker
+public sealed class PokerHandsChecker : IPokerHandsChecker
 {
     public bool IsValidHand(IHand hand)
     {
