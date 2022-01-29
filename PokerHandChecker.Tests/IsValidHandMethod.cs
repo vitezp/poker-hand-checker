@@ -11,7 +11,7 @@ namespace PokerHandChecker.Tests
     [TestClass]
     public class IsValidHandMethod
     {
-        private readonly IPokerHandsChecker pokerHandsChecker = new PokerHandChecker.Application.PokerHandsChecker();
+        private readonly IPokerHandsChecker sut = new PokerHandsChecker();
 
         [TestMethod]
         [Description("Test on PokerHandsChecker.cs")]
@@ -19,7 +19,7 @@ namespace PokerHandChecker.Tests
         {
             var handWithNoCards = new Hand(new List<ICard>());
             var expected = false;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithNoCards);
+            var actual = sut.IsValidHand(handWithNoCards);
 
             Assert.AreEqual(expected, actual);
         }
@@ -38,7 +38,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = true;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithFiveDifferentCards);
+            var actual = sut.IsValidHand(handWithFiveDifferentCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -57,7 +57,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithSixDifferentCards);
+            var actual = sut.IsValidHand(handWithSixDifferentCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -75,7 +75,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithTwoEqualCard);
+            var actual = sut.IsValidHand(handWithTwoEqualCard);
             Assert.AreEqual(expected, actual);
         }
 
@@ -93,7 +93,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithFiveEqualCards);
+            var actual = sut.IsValidHand(handWithFiveEqualCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -111,7 +111,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithTwoEqualPairOfCards);
+            var actual = sut.IsValidHand(handWithTwoEqualPairOfCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -128,7 +128,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithTwoEqualOfFourCards);
+            var actual = sut.IsValidHand(handWithTwoEqualOfFourCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -147,7 +147,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsValidHand(handWithTwoEqualOfSixCards);
+            var actual = sut.IsValidHand(handWithTwoEqualOfSixCards);
             Assert.AreEqual(expected, actual);
         }
     }

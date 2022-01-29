@@ -11,7 +11,7 @@ namespace PokerHandChecker.Tests
     [TestClass]
     public class IsThreeOfAKindMethod
     {
-        private readonly IPokerHandsChecker pokerHandsChecker = new PokerHandChecker.Application.PokerHandsChecker();
+        private readonly IPokerHandsChecker sut = new PokerHandsChecker();
 
         [TestMethod]
         [Description("Test on PokerHandsChecker.cs")]
@@ -20,7 +20,7 @@ namespace PokerHandChecker.Tests
         {
             var handWithNoCards = new Hand(new List<ICard>());
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithNoCards);
+            var actual = sut.IsThreeOfAKind(handWithNoCards);
 
             Assert.AreEqual(expected, actual);
         }
@@ -39,7 +39,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -58,7 +58,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -76,7 +76,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -96,7 +96,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -114,7 +114,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -132,7 +132,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -151,7 +151,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -169,7 +169,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = true;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -187,7 +187,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -205,7 +205,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -224,7 +224,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualOfFiveCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualOfFiveCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -244,7 +244,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithSixDifferentCards);
+            var actual = sut.IsThreeOfAKind(handWithSixDifferentCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -263,7 +263,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualCard);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualCard);
             Assert.AreEqual(expected, actual);
         }
 
@@ -282,7 +282,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualCard);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualCard);
             Assert.AreEqual(expected, actual);
         }
 
@@ -301,7 +301,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveEqualCards);
+            var actual = sut.IsThreeOfAKind(handWithFiveEqualCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -320,7 +320,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualPairOfCards);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualPairOfCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -338,7 +338,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualOfFourCards);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualOfFourCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -358,7 +358,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualOfSixCards);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualOfSixCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -378,7 +378,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -398,7 +398,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualOfSixCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualOfSixCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -416,7 +416,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -434,7 +434,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -452,7 +452,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -470,7 +470,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualOfSixCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualOfSixCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -488,7 +488,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -506,7 +506,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithTwoEqualOfSixCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithTwoEqualOfSixCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -524,7 +524,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -542,7 +542,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -560,7 +560,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsThreeOfAKind(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
     }

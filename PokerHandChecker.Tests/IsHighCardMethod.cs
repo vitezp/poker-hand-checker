@@ -11,7 +11,7 @@ namespace PokerHandChecker.Tests
     [TestClass]
     public class IsHighCardMethod
     {
-        private readonly IPokerHandsChecker pokerHandsChecker = new PokerHandChecker.Application.PokerHandsChecker();
+        private readonly IPokerHandsChecker sut = new PokerHandsChecker();
 
         [TestMethod]
         [Description("Test on PokerHandsChecker.cs")]
@@ -20,7 +20,7 @@ namespace PokerHandChecker.Tests
         {
             var handWithNoCards = new Hand(new List<ICard>());
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithNoCards);
+            var actual = sut.IsHighCard(handWithNoCards);
 
             Assert.AreEqual(expected, actual);
         }
@@ -39,7 +39,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -58,7 +58,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -76,7 +76,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -96,7 +96,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -114,7 +114,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -132,7 +132,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -151,7 +151,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -169,7 +169,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -187,7 +187,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -205,7 +205,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -223,7 +223,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -241,7 +241,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -259,7 +259,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -277,7 +277,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -295,7 +295,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -313,7 +313,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -332,7 +332,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualOfFiveCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithTwoEqualOfFiveCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -352,7 +352,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithSixDifferentCards);
+            var actual = sut.IsHighCard(handWithSixDifferentCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -371,7 +371,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualCard);
+            var actual = sut.IsHighCard(handWithTwoEqualCard);
             Assert.AreEqual(expected, actual);
         }
 
@@ -390,7 +390,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualCard);
+            var actual = sut.IsHighCard(handWithTwoEqualCard);
             Assert.AreEqual(expected, actual);
         }
 
@@ -409,7 +409,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveEqualCards);
+            var actual = sut.IsHighCard(handWithFiveEqualCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -428,7 +428,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualPairOfCards);
+            var actual = sut.IsHighCard(handWithTwoEqualPairOfCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -446,7 +446,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualOfFourCards);
+            var actual = sut.IsHighCard(handWithTwoEqualOfFourCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -466,7 +466,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualOfSixCards);
+            var actual = sut.IsHighCard(handWithTwoEqualOfSixCards);
             Assert.AreEqual(expected, actual);
         }
 
@@ -486,7 +486,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -506,7 +506,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = false;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualOfSixCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithTwoEqualOfSixCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -524,7 +524,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = true;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualOfSixCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithTwoEqualOfSixCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -542,7 +542,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = true;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithFiveDifferentCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
 
@@ -560,7 +560,7 @@ namespace PokerHandChecker.Tests
             });
 
             var expected = true;
-            var actual = this.pokerHandsChecker.IsHighCard(handWithTwoEqualOfSixCardsOnEqualSuit);
+            var actual = sut.IsHighCard(handWithTwoEqualOfSixCardsOnEqualSuit);
             Assert.AreEqual(expected, actual);
         }
     }
